@@ -1,0 +1,15 @@
+version: '2'
+services:
+  nginx:
+    image: nginx
+    labels:
+      - "traefik.frontend.rule=Host:christmas.nguyenkhoa.me"
+      - "traefik.docker.network=traefik"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    network:
+      - traefik
+networks:
+  traefik:
+    external:
+      name: traefik
