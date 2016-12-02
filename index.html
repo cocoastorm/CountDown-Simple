@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CountDown Timer</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <template id="countdown">
+    <div class="content">
+      <div class="block">
+        <p class="digit">{{ days | two_digits }}</p>
+        <p class="text">Days</p>
+      </div>
+
+      <div class="block">
+        <p class="digit">{{ hours | two_digits }}</p>
+        <p class="text">Hours</p>
+      </div>
+
+      <div class="block">
+        <p class="digit">{{ minutes | two_digits }}</p>
+        <p class="text">Minutes</p>
+      </div>
+
+      <div class="block">
+        <p class="digit">{{ seconds | two_digits }}</p>
+        <p class="text">Seconds</p>
+      </div>
+    </div>
+  </template>
+
+  <div id="app">
+    <h1 class="text-center">{{ title }}</h1>
+    <countdown date-str="December 25, 2016"></countdown>
+  </div>
+
+  <script>
+    Vue.component('countdown', {
+      template: '#countdown',
+      props: ['dateStr'],
+      data() {
+        return {
+          now: Math.trunc((new Date()).getTime() / 1000)
+        }
+      },
+
+      created: function () {
+        var vm = this
+        setInterval(function () {
+          vm.now = Math.trunc((new Date().getTime()) / 1000);
+       }, 1000);
+      },
+
+      methods: {
+        getNow: function () {
+          this.now = Math.trunc((new Date().getTime() / 1000));
+        }
+      },
+
+      computed: {
+        date() {
+          return Math.trunc(Date.parse(this.dateStr) / 1000)
+        },
+
+        seconds() {
+          return (this.date - this.now) % 60;
+        },
+
+        minutes() {
+          return Math.trunc((this.date - this.now) / 60) % 60;
+        },
+
+        hours() {
+          return Math.trunc((this.date - this.now) / 60 / 60) % 24;
+        },
+
+        days() {
+          return Math.trunc((this.date - this.now) / 60 / 60 / 24);
+        }
+      }
+    });
+
+    Vue.filter('two_digits', function (value) {
+      var strValue = value.toString()
+      if(strValue <= 1) {
+        return "0" + strValue
+      }
+      return strValue
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        title: "CountDown"
+      }
+    });
+  </script>
+</body>
+</html>
