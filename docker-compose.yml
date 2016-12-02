@@ -9,7 +9,10 @@ services:
       - ./:/usr/share/nginx/html:ro
     networks:
       - traefik
+      - back-end
 networks:
   traefik:
     external:
       name: traefik
+  back-end:
+    driver: bridge
