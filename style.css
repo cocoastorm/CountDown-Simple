@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Roboto', serif;
-  font-size: 18px;
+  font-size: 16px;
   background-color: #048BA8;
 }
 
@@ -16,7 +16,11 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-.content {
+.timer {
+  margin: 10% 5%;
+}
+
+.countdown-timer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .text {
   color: #00C534;
-  font-size: 38px;
+  font-size: 2em;
   font-family: 'Slabo 27px', serif;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -40,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .digit {
   color: #ecf0f1;
-  font-size: 150px;
+  font-size: 8em;
   font-family: 'Roboto', serif;
   margin: 10px;
   text-align: center;
